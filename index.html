@@ -1,363 +1,685 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BCT Ultimate Ranking Studio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-deep: #030000;
-            --red-accent: #ff1a1a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BCT RED INTEL - Ultimate Ranking Studio</title>
 
-        body {
-            background-color: var(--bg-deep);
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            overscroll-behavior-y: none;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+<!-- High-Tech Premium Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
-        .smooth-scroll {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .smooth-scroll::-webkit-scrollbar { width: 5px; }
-        .smooth-scroll::-webkit-scrollbar-track { background: transparent; }
-        .smooth-scroll::-webkit-scrollbar-thumb { background: #4a0000; border-radius: 10px; }
-        .smooth-scroll::-webkit-scrollbar-thumb:hover { background: var(--red-accent); }
+<style>
+/* ==========================================================================
+   PREMIUM RED & BLACK CYBER THEME (RANKING STUDIO)
+   ========================================================================== */
+:root {
+  --clr-bg-deep: #030000;
+  --clr-bg-panel: #0a0002;
+  --clr-bg-surface: #120004;
+  
+  --clr-red-neon: #ff003c;
+  --clr-red-bright: #ff3366;
+  --clr-red-dark: #3a000e;
+  --clr-red-blood: #8a001d;
+  --clr-red-muted: rgba(255, 0, 60, 0.2);
+  
+  --clr-text-main: #ffffff;
+  --clr-text-off: #ffe6eb;
+  --clr-text-dim: #a37c84;
 
-        .glass-input {
-            background: rgba(20, 0, 0, 0.6);
-            border: 1px solid rgba(255, 50, 50, 0.2);
-            color: white;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-        .glass-input:focus {
-            border-color: var(--red-accent);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-            outline: none;
-            background: rgba(30, 0, 0, 0.8);
-        }
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
 
-        .visual-area {
-            background: radial-gradient(circle at center, #1a0000 0%, #030000 100%);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            z-index: 20;
-        }
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-        .dashboard-area {
-            background: linear-gradient(180deg, #0a0000 0%, #050000 100%);
-            z-index: 10;
-        }
-    </style>
+body {
+  background-color: var(--clr-bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 0%, var(--clr-red-dark) 0%, transparent 60%),
+    linear-gradient(0deg, rgba(255,0,60,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,60,0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 30px 30px, 30px 30px;
+  background-attachment: fixed;
+  color: var(--clr-text-main);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--clr-bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--clr-red-blood); border-radius: 10px; }
+
+.app-container {
+  width: 100%;
+  max-width: 500px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, rgba(10,0,2,0.95) 0%, rgba(3,0,0,0.98) 100%);
+  box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,0,60,0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Header */
+.sys-header {
+  padding: 20px 20px 15px;
+  border-bottom: 2px solid var(--clr-red-blood);
+  position: relative;
+  background: var(--clr-bg-panel);
+  z-index: 10;
+}
+.sys-header::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; width: 30%; height: 2px;
+  background: var(--clr-red-neon);
+  box-shadow: 0 0 10px var(--clr-red-neon);
+  animation: scan 4s infinite ease-in-out alternate;
+}
+@keyframes scan { 0% { left: 0; width: 10%; } 100% { left: 90%; width: 10%; } }
+
+.sys-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.sys-badge {
+  font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  background: var(--clr-red-blood); color: #fff; padding: 4px 8px;
+  border-radius: var(--radius-sm); letter-spacing: 1px;
+  border: 1px solid var(--clr-red-neon); box-shadow: 0 0 8px rgba(255,0,60,0.4);
+}
+.sys-status {
+  font-family: 'Rajdhani', sans-serif; font-size: 12px; font-weight: 700; color: var(--clr-red-neon);
+  display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 2px;
+}
+.sys-status::before {
+  content: ''; display: block; width: 6px; height: 6px;
+  background: var(--clr-red-neon); border-radius: 50%;
+  animation: pulse 1s infinite alternate;
+}
+@keyframes pulse { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.2); } }
+
+.sys-title {
+  font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 2px; line-height: 1.1;
+  color: var(--clr-text-main); text-shadow: 2px 2px 0px var(--clr-red-blood);
+}
+.sys-subtitle {
+  font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--clr-text-dim);
+  letter-spacing: 3px; margin-top: 4px;
+}
+
+/* Canvas Area */
+.canvas-wrapper { padding: 20px; background: radial-gradient(circle at center, rgba(255,0,60,0.05) 0%, transparent 70%); }
+.canvas-frame {
+  position: relative; background: #000; border-radius: var(--radius-md); padding: 4px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,0,60,0.3);
+}
+.canvas-frame::before, .canvas-frame::after {
+  content: ''; position: absolute; width: 20px; height: 20px; border-color: var(--clr-red-neon); border-style: solid; pointer-events: none;
+}
+.canvas-frame::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.canvas-frame::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+/* 1280 x 1370 Aspect Ratio */
+#posterCanvas { width: 100%; aspect-ratio: 1280/1370; object-fit: contain; display: block; border-radius: calc(var(--radius-md) - 2px); }
+
+/* Dashboard & Tabs UI */
+.dashboard { flex: 1; padding: 0 20px 20px; display: flex; flex-direction: column; gap: 20px; }
+
+.cyber-tabs {
+  display: flex; gap: 6px; background: rgba(0,0,0,0.8);
+  padding: 6px; border-radius: 12px; 
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.8), 0 0 0 1px var(--clr-red-dark);
+}
+.cyber-tab {
+  flex: 1; padding: 14px 0; background: rgba(255,255,255,0.02); border: 1px solid transparent;
+  color: var(--clr-text-dim); font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.3s;
+  border-radius: 8px;
+}
+.cyber-tab:hover { color: var(--clr-text-off); background: rgba(255,0,60,0.05); }
+.cyber-tab.active { 
+  background: linear-gradient(180deg, #660015 0%, #050001 100%); 
+  color: #fff; 
+  border: 1px solid var(--clr-red-blood);
+  box-shadow: 0 4px 15px rgba(255,0,60,0.3), inset 0 2px 0 var(--clr-red-neon); 
+}
+
+.panel-content { display: none; animation: fadeUp 0.3s ease forwards; }
+.panel-content.active { display: flex; flex-direction: column; gap: 16px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.sec-title {
+  font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--clr-red-neon);
+  letter-spacing: 2px; display: flex; align-items: center; gap: 10px;
+}
+.sec-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--clr-red-muted), transparent); }
+
+/* Inputs */
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-label {
+  font-family: 'Share Tech Mono', monospace; font-size: 11px;
+  color: var(--clr-text-dim); text-transform: uppercase; letter-spacing: 1px;
+  display: flex; justify-content: space-between;
+}
+.cyber-input {
+  width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--clr-red-dark);
+  border-radius: var(--radius-sm); color: var(--clr-text-main); 
+  font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600;
+  padding: 12px 14px; outline: none; transition: all 0.3s;
+}
+.cyber-input:focus { border-color: var(--clr-red-neon); background: rgba(255,0,60,0.05); box-shadow: 0 0 0 2px rgba(255,0,60,0.2); }
+
+.btn-outline {
+  padding: 12px 14px; background: rgba(20,0,5,0.8); border: 1px solid var(--clr-red-dark);
+  color: var(--clr-text-off); font-family: 'Rajdhani', sans-serif; font-size: 14px; font-weight: 700;
+  border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase;
+}
+.btn-outline:hover { border-color: var(--clr-red-neon); background: rgba(255,0,60,0.1); color:#fff; }
+
+.upload-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+
+.btn-primary {
+  width: 100%; padding: 18px;
+  background: linear-gradient(135deg, var(--clr-red-blood) 0%, var(--clr-red-neon) 100%);
+  border: none; border-radius: var(--radius-md);
+  color: #fff; font-family: 'Orbitron', sans-serif; font-size: 18px; font-weight: 900;
+  letter-spacing: 2px; cursor: pointer; text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(255,0,60,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: 0.2s; margin-top: 10px;
+}
+.btn-primary:active { transform: scale(0.98); }
+
+.stamp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cyber-checkbox {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--clr-red-dark);
+  border-radius: var(--radius-sm); cursor: pointer; transition: 0.2s;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; color: var(--clr-text-dim);
+}
+.cyber-checkbox input { display: none; }
+.cyber-checkbox.checked { background: rgba(255,0,60,0.15); border-color: var(--clr-red-neon); color: var(--clr-red-neon); }
+
+.sys-log {
+  text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 12px;
+  color: var(--clr-text-dim); padding: 10px; border: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.5); border-radius: var(--radius-sm);
+}
+
+.profile-card {
+  background: linear-gradient(180deg, rgba(20,0,5,0.6) 0%, rgba(5,0,1,0.8) 100%);
+  border: 1px solid var(--clr-red-dark);
+  border-radius: var(--radius-md); padding: 15px; margin-bottom: 15px;
+}
+</style>
 </head>
 <body>
 
-    <!-- VISUAL PREVIEW AREA -->
-    <div class="visual-area h-[45vh] lg:h-[55vh] w-full flex items-center justify-center p-4 border-b border-red-900/40 relative">
-        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: linear-gradient(#ff0000 1px, transparent 1px), linear-gradient(90deg, #ff0000 1px, transparent 1px); background-size: 20px 20px;"></div>
-        
-        <div class="relative h-full aspect-[4/5] rounded-xl overflow-hidden ring-1 ring-red-900/30 shadow-[0_0_30px_rgba(255,0,0,0.05)] bg-[#050000]">
-            <!-- Perfect 4:5 Portrait Ratio for Facebook/Insta -->
-            <canvas id="posterCanvas" width="1080" height="1350" class="w-full h-full object-contain block"></canvas>
-        </div>
+<div class="app-container">
+  
+  <header class="sys-header">
+    <div class="sys-top-row">
+      <span class="sys-status">Secured Link</span>
+      <span class="sys-badge">BCT // RED INTEL</span>
+    </div>
+    <div class="sys-title">RANKING STUDIO</div>
+    <div class="sys-subtitle">ULTIMATE TOP 5 RANKING GENERATOR</div>
+  </header>
+
+  <div class="canvas-wrapper">
+    <div class="canvas-frame">
+      <!-- FIXED: 1280 x 1370 Poster Ratio -->
+      <canvas id="posterCanvas" width="1280" height="1370"></canvas>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <!-- TABS -->
+    <nav class="cyber-tabs">
+      <button class="cyber-tab active" onclick="switchTab('tab-set')">SETTINGS</button>
+      <button class="cyber-tab" onclick="switchTab('tab-top13')">TOP 1-3</button>
+      <button class="cyber-tab" onclick="switchTab('tab-top45')">TOP 4-5</button>
+    </nav>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-set" class="panel-content active">
+      <div class="sec-title">GLOBAL SETTINGS</div>
+      <div class="input-group">
+        <div class="input-label">Main Ranking Title</div>
+        <input type="text" id="mainTitle" value="WEEKLY TOP 5 RANKING" class="cyber-input" style="text-align:center; font-family:'Orbitron', sans-serif;" oninput="updateTitle(this.value)">
+      </div>
+
+      <div class="stamp-grid" style="margin-top: 15px;">
+        <label class="cyber-checkbox checked">
+          <input type="checkbox" id="chkLogo" checked onchange="toggleCheckbox(this); queueRender()">
+          Show BCT Logo
+        </label>
+        <label class="cyber-checkbox checked">
+          <input type="checkbox" id="chkScan" checked onchange="toggleCheckbox(this); queueRender()">
+          Show Scanlines
+        </label>
+      </div>
+
+      <button class="btn-primary" onclick="exportHD()">DOWNLOAD HD POSTER</button>
+      <div class="sys-log" id="statusLog">Ready to Edit.</div>
     </div>
 
-    <!-- DASHBOARD CONTROLS (SIMPLIFIED) -->
-    <div class="dashboard-area h-[55vh] lg:h-[45vh] w-full overflow-y-auto smooth-scroll relative pb-28 pt-6 px-4 md:px-8">
-        <div class="max-w-4xl mx-auto space-y-6">
-            
-            <div class="text-center mb-8 relative">
-                <h1 class="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 font-bold tracking-[0.2em]" style="font-family: 'Bebas Neue', sans-serif;">
-                    STUDIO DASHBOARD
-                </h1>
-                <p class="text-gray-500 text-[11px] uppercase tracking-widest mt-1 font-light">Fast & Clean Live Editor</p>
-            </div>
-
-            <!-- Global Settings -->
-            <div class="bg-black/40 backdrop-blur-md p-5 rounded-2xl border border-red-900/30">
-                <label class="block text-red-500/80 text-[10px] font-semibold mb-2 tracking-[0.2em] uppercase">Main Title</label>
-                <input type="text" id="mainTitle" value="WEEKLY TOP 5 RANKING" class="glass-input w-full rounded-xl p-3 text-center text-lg font-medium tracking-wider uppercase" oninput="queueRender()">
-            </div>
-
-            <!-- Profiles Container -->
-            <div id="profilesContainer" class="space-y-5"></div>
-        </div>
+    <!-- TOP 1-3 TAB -->
+    <div id="tab-top13" class="panel-content">
+      <!-- Injected via JS -->
     </div>
 
-    <!-- FLOATING EXPORT BUTTON -->
-    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/90 to-transparent z-30 flex justify-center backdrop-blur-sm">
-        <button onclick="exportHD()" class="w-full max-w-4xl bg-gradient-to-r from-red-800 to-red-600 hover:from-red-600 hover:to-red-500 text-white font-medium py-4 px-6 rounded-2xl shadow-[0_5px_20px_rgba(255,0,0,0.25)] transition-all flex items-center justify-center text-lg tracking-widest active:scale-[0.98] border border-red-500/30">
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            <span style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px; font-size: 22px;">DOWNLOAD HD POSTER</span>
-        </button>
+    <!-- TOP 4-5 TAB -->
+    <div id="tab-top45" class="panel-content">
+      <!-- Injected via JS -->
     </div>
 
-    <script>
-        const canvas = document.getElementById('posterCanvas');
-        const ctx = canvas.getContext('2d');
-        let renderFrameId = null;
+  </div>
+</div>
 
-        const teamLogo = new Image();
-        teamLogo.crossOrigin = "Anonymous";
-        teamLogo.src = "https://i.ibb.co/Y72LMbdQ/20260502-163657.png";
-        teamLogo.onload = () => queueRender();
+<script>
+// --- State & Setup ---
+const canvas = document.getElementById('posterCanvas');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
+const W = 1280; // FIXED Size
+const H = 1370; // FIXED Size
 
-        // State without zoom/move variables
-        const appState = {
-            title: "WEEKLY TOP 5 RANKING",
-            profiles: [
-                { id: "p1", rank: "TOP-1", name: "NULL", code: "", img: null, x: 540, y: 360, r: 145 },
-                { id: "p2", rank: "TOP-2", name: "NULL", code: "", img: null, x: 270, y: 740, r: 130 },
-                { id: "p3", rank: "TOP-3", name: "NULL", code: "", img: null, x: 810, y: 740, r: 130 },
-                { id: "p4", rank: "TOP-4", name: "NULL", code: "", img: null, x: 330, y: 1100, r: 120 },
-                { id: "p5", rank: "TOP-5", name: "NULL", code: "", img: null, x: 750, y: 1100, r: 120 }
-            ]
-        };
+let renderFrameId = null;
 
-        function buildDashboard() {
-            const container = document.getElementById('profilesContainer');
-            appState.profiles.forEach((p, idx) => {
-                const num = idx + 1;
-                // Simplified HTML for each profile
-                const html = `
-                    <div class="bg-black/40 backdrop-blur-sm p-5 rounded-2xl border border-red-900/20 shadow-lg transition-all hover:border-red-900/50">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center">
-                                <span class="bg-red-900/80 text-white px-3 py-1 rounded-md text-xs font-semibold tracking-widest shadow-lg mr-3 border border-red-700/50">TOP ${num}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div class="relative w-full">
-                                <input type="file" id="file-${idx}" accept="image/*" class="hidden" onchange="handleUpload(event, ${idx})">
-                                <label for="file-${idx}" class="w-full flex items-center justify-center px-4 py-3 bg-[#0f0000] text-red-400 rounded-xl border border-red-900/40 hover:bg-red-900/80 hover:text-white transition-all cursor-pointer text-xs font-medium tracking-widest uppercase shadow-inner">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path></svg>
-                                    CHOOSE PHOTO (1:1 RECOMMENDED)
-                                </label>
-                            </div>
-                            
-                            <div class="flex gap-3">
-                                <div class="w-[70%]">
-                                    <label class="block text-[9px] text-gray-500 mb-1 uppercase tracking-widest pl-1">Name</label>
-                                    <input type="text" placeholder="E.g. ALMAN" value="" class="glass-input w-full rounded-xl p-3 text-sm font-light uppercase" oninput="updateData(${idx}, 'name', this.value)">
-                                </div>
-                                <div class="w-[30%]">
-                                    <label class="block text-[9px] text-gray-500 mb-1 uppercase tracking-widest pl-1">Code</label>
-                                    <input type="text" placeholder="S-13" value="" class="glass-input w-full rounded-xl p-3 text-sm font-light uppercase text-center" oninput="updateData(${idx}, 'code', this.value)">
-                                </div>
-                            </div>
-                        </div>
+const teamLogo = new Image();
+teamLogo.crossOrigin = "Anonymous";
+teamLogo.src = "https://i.ibb.co/Y72LMbdQ/20260502-163657.png";
+teamLogo.onload = () => queueRender();
+
+// PERFECTLY ALIGNED FOR 1280 WIDTH
+const appState = {
+    title: "WEEKLY TOP 5 RANKING",
+    profiles: [
+        { id: "p1", rank: "TOP 1", name: "", code: "", img: null, x: 640, y: 360, r: 150 },
+        { id: "p2", rank: "TOP 2", name: "", code: "", img: null, x: 330, y: 750, r: 135 },
+        { id: "p3", rank: "TOP 3", name: "", code: "", img: null, x: 950, y: 750, r: 135 },
+        { id: "p4", rank: "TOP 4", name: "", code: "", img: null, x: 400, y: 1120, r: 125 },
+        { id: "p5", rank: "TOP 5", name: "", code: "", img: null, x: 880, y: 1120, r: 125 }
+    ]
+};
+
+// --- UI Logic ---
+function switchTab(tabId) {
+  document.querySelectorAll('.panel-content').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  const tabs = document.querySelectorAll('.cyber-tab');
+  tabs[0].classList.toggle('active', tabId === 'tab-set');
+  tabs[1].classList.toggle('active', tabId === 'tab-top13');
+  tabs[2].classList.toggle('active', tabId === 'tab-top45');
+}
+
+function toggleCheckbox(input) { input.parentElement.classList.toggle('checked', input.checked); }
+function updateTitle(val) { appState.title = val; queueRender(); }
+function logMsg(msg) { document.getElementById('statusLog').innerText = msg; }
+
+function updateData(index, field, value) {
+    appState.profiles[index][field] = value.toUpperCase();
+    queueRender();
+}
+
+function handleUpload(event, index) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                appState.profiles[index].img = img;
+                logMsg(`Image updated for TOP ${index + 1}`);
+                queueRender();
+            }
+            img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function buildDashboard() {
+    const t13 = document.getElementById('tab-top13');
+    const t45 = document.getElementById('tab-top45');
+    
+    appState.profiles.forEach((p, idx) => {
+        const num = idx + 1;
+        const html = `
+            <div class="profile-card">
+                <div class="sec-title" style="margin-bottom:10px;">POSITION: TOP ${num}</div>
+                
+                <div class="input-group" style="margin-bottom:12px;">
+                    <label for="file-${idx}" class="btn-outline">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        UPLOAD PHOTO
+                    </label>
+                    <input type="file" id="file-${idx}" accept="image/*" style="display:none;" onchange="handleUpload(event, ${idx})">
+                </div>
+                
+                <div class="upload-grid">
+                    <div class="input-group">
+                        <div class="input-label">Name</div>
+                        <input type="text" placeholder="E.g. ALMAN" class="cyber-input" style="text-transform:uppercase;" oninput="updateData(${idx}, 'name', this.value)">
                     </div>
-                `;
-                container.innerHTML += html;
-            });
+                    <div class="input-group">
+                        <div class="input-label">Code</div>
+                        <input type="text" placeholder="S-13" class="cyber-input" style="text-align:center; text-transform:uppercase;" oninput="updateData(${idx}, 'code', this.value)">
+                    </div>
+                </div>
+            </div>
+        `;
+        if(num <= 3) t13.innerHTML += html;
+        else t45.innerHTML += html;
+    });
+}
+
+// --- Canvas Rendering Engine ---
+function queueRender() {
+    if (renderFrameId) cancelAnimationFrame(renderFrameId);
+    renderFrameId = requestAnimationFrame(drawCanvas);
+}
+
+function drawAbstractBackground() {
+  // 1. Solid Black Fill (Prevents transparent download issues)
+  ctx.fillStyle = '#050001';
+  ctx.fillRect(0, 0, W, H);
+
+  // 2. Base Dark Red/Black Radial Gradient
+  const gradBase = ctx.createRadialGradient(W/2, H/2, 50, W/2, H/2, 1400);
+  gradBase.addColorStop(0, '#260006');
+  gradBase.addColorStop(0.5, '#0a0002'); 
+  gradBase.addColorStop(1, '#020000');
+  ctx.fillStyle = gradBase; 
+  ctx.fillRect(0, 0, W, H);
+
+  // 3. Glowing Polygons & Abstract Red Features
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen';
+  
+  let gradFlare = ctx.createLinearGradient(W, 0, 0, H);
+  gradFlare.addColorStop(0, 'rgba(255, 0, 60, 0.25)');
+  gradFlare.addColorStop(0.5, 'transparent');
+  ctx.fillStyle = gradFlare;
+  ctx.beginPath(); ctx.moveTo(W, 0); ctx.lineTo(W, H/2); ctx.lineTo(0, H); ctx.lineTo(0, H/2); ctx.fill();
+
+  let gradFlare2 = ctx.createLinearGradient(0, H, W, 0);
+  gradFlare2.addColorStop(0, 'rgba(180, 0, 35, 0.3)');
+  gradFlare2.addColorStop(0.6, 'transparent');
+  ctx.fillStyle = gradFlare2;
+  ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(W/2, H); ctx.lineTo(W, H/2); ctx.lineTo(W/2, 0); ctx.fill();
+  
+  let orbCenter = ctx.createRadialGradient(W/2, 380, 10, W/2, 380, 700); 
+  orbCenter.addColorStop(0, 'rgba(255, 0, 60, 0.2)');
+  orbCenter.addColorStop(1, 'transparent');
+  ctx.fillStyle = orbCenter; ctx.fillRect(0, 0, W, H);
+  
+  // Cyber Lines
+  ctx.strokeStyle = 'rgba(255, 0, 60, 0.12)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(0, 200); ctx.lineTo(200, 200); ctx.lineTo(300, 300); ctx.lineTo(W, 300); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W, 1050); ctx.lineTo(W-200, 1050); ctx.lineTo(W-300, 950); ctx.lineTo(0, 950); ctx.stroke();
+  ctx.restore();
+
+  // 4. Polished Tech Grid (Using '+' signs)
+  ctx.strokeStyle = 'rgba(255, 0, 60, 0.04)'; 
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for(let i=0; i<W; i+=50) { ctx.moveTo(i, 0); ctx.lineTo(i, H); }
+  for(let j=0; j<H; j+=50) { ctx.moveTo(0, j); ctx.lineTo(W, j); }
+  ctx.stroke();
+  
+  ctx.fillStyle = 'rgba(255, 0, 60, 0.35)';
+  for(let i=50; i<W; i+=150) {
+    for(let j=50; j<H; j+=150) { 
+      ctx.fillRect(i-3, j-1, 7, 2); 
+      ctx.fillRect(i-1, j-3, 2, 7); 
+    }
+  }
+
+  // 5. Scanlines (Background Layer)
+  if(document.getElementById('chkScan').checked) {
+    ctx.save();
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    for(let i=0; i<H; i+=4) ctx.fillRect(0, i, W, 2);
+    ctx.restore();
+  }
+}
+
+// 🚀 FIXED: Simple, Clean & Smaller Title Box
+function drawTitle(text, x, y) {
+    ctx.save();
+    
+    ctx.font = '900 38px "Orbitron"'; // Smaller Font
+    const textWidth = ctx.measureText(text).width;
+    
+    const boxW = Math.max(textWidth + 100, 350); 
+    const boxH = 65; // Smaller Height
+    
+    const cx = x - boxW/2;
+    const cy = y - boxH/2;
+
+    ctx.shadowColor = 'rgba(255, 0, 60, 0.4)';
+    ctx.shadowBlur = 15;
+
+    // Simple Clean Box Design
+    ctx.beginPath();
+    const cut = 15;
+    ctx.moveTo(cx + cut, cy);
+    ctx.lineTo(cx + boxW - cut, cy);
+    ctx.lineTo(cx + boxW, cy + boxH/2);
+    ctx.lineTo(cx + boxW - cut, cy + boxH);
+    ctx.lineTo(cx + cut, cy + boxH);
+    ctx.lineTo(cx, cy + boxH/2);
+    ctx.closePath();
+    
+    let boxGrad = ctx.createLinearGradient(cx, cy, cx, cy + boxH);
+    boxGrad.addColorStop(0, 'rgba(40, 0, 5, 0.95)'); 
+    boxGrad.addColorStop(1, 'rgba(5, 0, 1, 0.95)');  
+    ctx.fillStyle = boxGrad;
+    ctx.fill();
+    
+    ctx.shadowBlur = 0; 
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = 'rgba(255, 0, 60, 0.8)';
+    ctx.stroke();
+
+    // Render Title Text
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.letterSpacing = "3px";
+    
+    ctx.shadowColor = '#ff003c';
+    ctx.shadowBlur = 10;
+    ctx.fillText(text, x, y + 2); 
+    ctx.restore();
+}
+
+function drawProfile(p) {
+    ctx.save();
+
+    // Deep Red Glow behind profile
+    ctx.shadowColor = 'rgba(255, 0, 60, 0.6)';
+    ctx.shadowBlur = 40;
+
+    // Base Circle
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.closePath();
+
+    if (p.img) {
+        ctx.save();
+        ctx.clip(); 
+        
+        // Perfect Cover Scale
+        const scale = Math.max((p.r * 2) / p.img.width, (p.r * 2) / p.img.height);
+        const drawW = p.img.width * scale;
+        const drawH = p.img.height * scale;
+        const drawX = p.x - drawW / 2;
+        const drawY = p.y - drawH / 2;
+
+        ctx.drawImage(p.img, drawX, drawY, drawW, drawH);
+        ctx.restore();
+    } else {
+        // Empty State Tech Design
+        ctx.fillStyle = 'rgba(15, 0, 4, 0.9)';
+        ctx.fill();
+        
+        ctx.strokeStyle = 'rgba(255,0,60,0.15)';
+        ctx.lineWidth = 2;
+        for(let i= -p.r; i < p.r; i+=20) {
+            ctx.beginPath(); ctx.moveTo(p.x+i, p.y-p.r); ctx.lineTo(p.x+i+p.r, p.y+p.r); ctx.stroke();
         }
 
-        document.getElementById('mainTitle').addEventListener('input', (e) => {
-            appState.title = e.target.value.toUpperCase();
-            queueRender();
-        });
+        ctx.fillStyle = 'rgba(255, 0, 60, 0.8)';
+        ctx.font = '700 18px "Orbitron"';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.letterSpacing = "2px";
+        ctx.fillText("NO IMAGE", p.x, p.y);
+    }
 
-        function updateData(index, field, value) {
-            appState.profiles[index][field] = value.toUpperCase();
-            queueRender();
+    // Elegant Cyber Borders
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r - 8, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = '#ff003c';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Inner Red Ring
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(255, 0, 60, 0.6)';
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r + 6, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.restore();
+
+    // Draw Rank Badge
+    const badgeW = 130;
+    const badgeH = 34;
+    const badgeY = p.y + p.r + 20; 
+    
+    ctx.save();
+    ctx.fillStyle = '#ff003c';
+    ctx.shadowColor = '#ff003c';
+    ctx.shadowBlur = 10;
+    
+    // Tech Angled Pill
+    ctx.beginPath();
+    const cut = 8;
+    ctx.moveTo(p.x - badgeW/2 + cut, badgeY); ctx.lineTo(p.x + badgeW/2, badgeY);
+    ctx.lineTo(p.x + badgeW/2, badgeY + badgeH - cut); ctx.lineTo(p.x + badgeW/2 - cut, badgeY + badgeH);
+    ctx.lineTo(p.x - badgeW/2, badgeY + badgeH); ctx.lineTo(p.x - badgeW/2, badgeY + cut);
+    ctx.closePath();
+    ctx.fill();
+    ctx.shadowBlur = 0; // reset for text
+
+    ctx.font = '800 16px "Orbitron"';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.letterSpacing = "2px";
+    ctx.textBaseline = 'middle';
+    ctx.fillText(p.rank, p.x, badgeY + badgeH/2 + 2);
+    ctx.restore();
+    
+    // Draw Name & Code
+    const nameY = badgeY + badgeH + 28; 
+    
+    let displayName = p.name === "" ? "UNKNOWN" : p.name;
+    if (p.code && p.code !== "") {
+        displayName += ` // ${p.code}`; 
+    }
+
+    ctx.font = '700 28px "Rajdhani"';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.letterSpacing = "1px";
+    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+    ctx.shadowBlur = 4;
+    ctx.fillText(displayName, p.x, nameY, 320); 
+    ctx.shadowBlur = 0;
+}
+
+function drawCanvas() {
+    drawAbstractBackground();
+    
+    const titleText = document.getElementById('mainTitle').value.trim() || "WEEKLY TOP 5 RANKING";
+    drawTitle(titleText, W/2, 100);
+
+    // Draw all 5 profiles
+    appState.profiles.forEach(p => drawProfile(p));
+
+    // Foreground Dark Vignette
+    ctx.save();
+    const vig = ctx.createRadialGradient(W/2, H/2, W/4, W/2, H/2, W);
+    vig.addColorStop(0, 'transparent'); 
+    vig.addColorStop(1, 'rgba(0,0,0,0.6)');
+    ctx.fillStyle = vig; 
+    ctx.fillRect(0,0,W,H);
+    ctx.restore();
+
+    // 🚀 FIXED: Logo smaller and exactly in the corner
+    if(document.getElementById('chkLogo').checked && teamLogo.complete && teamLogo.naturalWidth > 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.85; 
+        ctx.globalCompositeOperation = 'screen';
+        
+        const maxLogoSize = 90; // Smaller Size
+        const paddingRight = 20; // Pushed nicely into the corner
+        const paddingTop = 20;   
+        
+        const logoX = W - maxLogoSize - paddingRight; 
+        const logoY = paddingTop;
+        
+        const ratio = Math.min(maxLogoSize / teamLogo.naturalWidth, maxLogoSize / teamLogo.naturalHeight);
+        const finalW = teamLogo.naturalWidth * ratio;
+        const finalH = teamLogo.naturalHeight * ratio;
+
+        const dx = logoX + (maxLogoSize - finalW)/2;
+        const dy = logoY + (maxLogoSize - finalH)/2;
+
+        ctx.drawImage(teamLogo, dx, dy, finalW, finalH);
+        ctx.restore();
+    }
+}
+
+function exportHD() {
+    logMsg("Rendering High-Quality Poster...");
+    queueRender(); 
+    
+    setTimeout(() => {
+        try {
+            const link = document.createElement('a');
+            link.download = `BCT_RANKING_${Date.now()}.jpg`;
+            // Saving as JPEG with solid black background to prevent transparency bugs
+            link.href = canvas.toDataURL('image/jpeg', 1.0);
+            link.click();
+            logMsg("Poster downloaded successfully!");
+        } catch (error) {
+            alert("To save: Right-click or Long-press the canvas image above and select 'Save Image'.");
+            logMsg("Use long-press to save.");
         }
+    }, 300);
+}
 
-        function handleUpload(event, index) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = new Image();
-                    img.onload = function() {
-                        appState.profiles[index].img = img;
-                        queueRender();
-                    }
-                    img.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function queueRender() {
-            if (renderFrameId) cancelAnimationFrame(renderFrameId);
-            renderFrameId = requestAnimationFrame(drawCanvas);
-        }
-
-        function drawCanvas() {
-            const w = canvas.width;
-            const h = canvas.height;
-
-            // Deep Dark Background
-            ctx.fillStyle = '#030000';
-            ctx.fillRect(0, 0, w, h);
-
-            const spotlight = ctx.createRadialGradient(w/2, h/2, 50, w/2, h/2, 800);
-            spotlight.addColorStop(0, 'rgba(40, 0, 0, 0.6)');
-            spotlight.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = spotlight;
-            ctx.fillRect(0, 0, w, h);
-
-            drawTitle(appState.title, w/2, 100);
-
-            appState.profiles.forEach(p => drawProfile(p));
-
-            if(teamLogo.complete && teamLogo.naturalWidth > 0) {
-                ctx.save();
-                const maxLogoSize = 90; 
-                const paddingRight = 40;
-                const paddingTop = 30;
-                
-                const logoX = w - maxLogoSize - paddingRight; 
-                const logoY = paddingTop;
-                
-                const ratio = Math.min(maxLogoSize / teamLogo.naturalWidth, maxLogoSize / teamLogo.naturalHeight);
-                const finalW = teamLogo.naturalWidth * ratio;
-                const finalH = teamLogo.naturalHeight * ratio;
-
-                const dx = logoX + (maxLogoSize - finalW)/2;
-                const dy = logoY + (maxLogoSize - finalH)/2;
-
-                ctx.shadowColor = 'rgba(255, 0, 0, 0.2)';
-                ctx.shadowBlur = 10;
-                ctx.drawImage(teamLogo, dx, dy, finalW, finalH);
-                ctx.restore();
-            }
-        }
-
-        function drawTitle(text, x, y) {
-            ctx.save();
-            const maxBoxWidth = 620; 
-            const boxH = 80;
-            const cx = x - maxBoxWidth/2;
-            const cy = y - boxH/2;
-
-            ctx.fillStyle = 'rgba(10, 0, 0, 0.8)';
-            ctx.beginPath();
-            ctx.roundRect(cx, cy, maxBoxWidth, boxH, 8);
-            ctx.fill();
-
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = 'rgba(255, 50, 50, 0.8)';
-            ctx.stroke();
-
-            ctx.font = '55px "Bebas Neue"';
-            ctx.fillStyle = '#ffffff';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.letterSpacing = "2px";
-            ctx.fillText(text, x, y + 4); 
-            ctx.restore();
-        }
-
-        function drawProfile(p) {
-            ctx.save();
-
-            ctx.shadowColor = 'rgba(255, 0, 0, 0.15)';
-            ctx.shadowBlur = 30;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.closePath();
-
-            if (p.img) {
-                ctx.save();
-                ctx.clip(); 
-                
-                // Simplified scaling (Auto cover)
-                const scale = Math.max((p.r * 2) / p.img.width, (p.r * 2) / p.img.height);
-                const drawW = p.img.width * scale;
-                const drawH = p.img.height * scale;
-                
-                // Centered perfectly
-                const drawX = p.x - drawW / 2;
-                const drawY = p.y - drawH / 2;
-
-                ctx.drawImage(p.img, drawX, drawY, drawW, drawH);
-                ctx.restore();
-            } else {
-                ctx.fillStyle = '#080000';
-                ctx.fill();
-                ctx.fillStyle = 'rgba(255,255,255,0.1)';
-                ctx.font = '300 24px "Poppins"';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.letterSpacing = "4px";
-                ctx.fillText("IMAGE", p.x, p.y);
-            }
-
-            // Elegant Borders
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r - 8, 0, Math.PI * 2);
-            ctx.stroke();
-
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = '#ff1a1a';
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.stroke();
-
-            ctx.restore();
-
-            ctx.textAlign = 'center';
-            
-            const badgeW = 110;
-            const badgeH = 28;
-            const badgeY = p.y + p.r + 20; 
-            
-            ctx.fillStyle = 'rgba(255, 20, 20, 0.15)';
-            ctx.strokeStyle = 'rgba(255, 50, 50, 0.5)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.roundRect(p.x - badgeW/2, badgeY, badgeW, badgeH, 14);
-            ctx.fill();
-            ctx.stroke();
-
-            ctx.font = '500 14px "Poppins"';
-            ctx.fillStyle = '#ff6666';
-            ctx.letterSpacing = "1px";
-            ctx.textBaseline = 'middle';
-            ctx.fillText(p.rank, p.x, badgeY + badgeH/2 + 1);
-            
-            const nameY = badgeY + badgeH + 20; 
-            
-            let displayName = p.name === "" ? "NULL" : p.name;
-            if (p.code && p.code !== "") {
-                displayName += ` | ${p.code}`; 
-            }
-
-            ctx.font = '300 24px "Poppins"';
-            ctx.fillStyle = '#ffffff';
-            ctx.letterSpacing = "1px";
-            ctx.fillText(displayName, p.x, nameY, 280); 
-        }
-
-        function exportHD() {
-            try {
-                const link = document.createElement('a');
-                link.download = 'BCT_Rankings_Ultimate.png';
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-            } catch (error) {
-                alert("Security block (CORS): To save, please right-click or long-press the canvas image and select 'Save Image'.");
-            }
-        }
-
-        document.fonts.ready.then(() => {
-            buildDashboard();
-            queueRender();
-        });
-    </script>
+// Initialize
+document.fonts.ready.then(() => {
+    buildDashboard();
+    queueRender();
+});
+</script>
 </body>
 </html>
